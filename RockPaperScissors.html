@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width">
+  <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+
+
+.image{
+    padding: 5px;
+    opacity: 0.3;
+}
+
+.selected{
+    opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Rock, Paper, Scissors</h1>
+    <br>
+    <h3>Please choose rock, paper or scissors and select the play button.</h3>
+    <div class="game">
+      <div class="selections">
+        <img src="rock.jpg" text="rock" id="rock" class="image"/>
+        <img src="paper.png" text="paper" id="paper" class="image"/>
+        <img src="scissors.jpg" text="scissors" id="scissors" class="image"/>
+      </div>
+      <div class="buttonClass">
+
+        <button onclick="myFunction()">Play!</button>
+
+      </div>
+
+      <div id="ResultText">
+
+      </div>
+  </div>
+</div>
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+        var userChoice = "";
+
+            $('#rock').click(function() {
+                $(this).removeClass('image');
+                $(this).addClass('selected');
+
+                userChoice = "rock";
+
+                $("#paper").addClass('image');
+                $("#paper").removeClass('selected');
+                $("#scissors").addClass('image');
+                $("#scissors").removeClass('selected');
+
+
+            });
+
+            $('#paper').click(function() {
+                $(this).removeClass('image');
+                $(this).addClass('selected');
+
+                userChoice = "paper";
+
+                $("#rock").addClass('image');
+                $("#rock").removeClass('selected');
+                $("#scissors").addClass('image');
+                $("#scissors").removeClass('selected');
+            });
+
+            $('#scissors').click(function() {
+                $(this).removeClass('image');
+                $(this).addClass('selected');
+
+                userChoice = "scissors";
+
+                $("#paper").addClass('image');
+                $("#paper").removeClass('selected');
+                $("#rock").addClass('image');
+                $("#rock").removeClass('selected');
+            });      
+
+
+      function myFunction() {
+
+        // Computer choice
+        var computerChoice = Math.random();
+        if (computerChoice < 0.34) {
+          computerChoice = "rock";
+        } else if (computerChoice <= 0.67) {
+          computerChoice = "paper";
+        } else {
+          computerChoice = "scissors";
+        }
+        
+
+        // Compare user choice vs computer choice
+        var compare = function(choice1, choice2) {
+          if (choice1 === choice2) {
+            return "It's a tie!";
+          }
+          if (choice1 === "rock") {
+            if (choice2 === "scissors") {
+              // rock wins
+              return "You win!";
+            } else {
+              // paper wins
+              return "You lose! Try again.";
+            }
+          }
+          if (choice1 === "paper") {
+            if (choice2 === "rock") {
+              // paper wins
+              return "You win!";
+            } else {
+              // scissors wins
+              return "You lose! Try again.";
+            }
+          }
+          if (choice1 === "scissors") {
+            if (choice2 === "rock") {
+              // rock wins
+              return "You lose! Try again.";
+            } else {
+              // scissors wins
+              return "You win!";
+            }
+          }
+        };
+        // Run the compare function
+        var results = compare(userChoice, computerChoice);
+        // Display results
+        document.getElementById('ResultText').innerHTML += "you: " + userChoice + "<br> computer: " + computerChoice + "<br><br>" + results + "<br><hr><br>";
+    }
+      
+</script>
